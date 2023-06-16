@@ -7,9 +7,7 @@ final permissionsProvider =
 );
 
 class PermissionsNotifier extends StateNotifier<PermissionsState> {
-  PermissionsNotifier() : super(PermissionsState()) {
-    checkPermissions();
-  }
+  PermissionsNotifier() : super(PermissionsState());
 
   Future<void> checkPermissions() async {
     final permissionsArray = await Future.wait([
@@ -35,6 +33,31 @@ class PermissionsNotifier extends StateNotifier<PermissionsState> {
     final status = await Permission.camera.request();
     state = state.copyWith(camera: status);
 
+    _openSettings(status);
+  }
+
+  requestPhotoLibraryPermission() async {
+    final status = await Permission.photos.request();
+    state = state.copyWith(photoLibrary: status);
+
+    _openSettings(status);
+  }
+
+  requestSensorsPermission() async {
+    final status = await Permission.sensors.request();
+    state = state.copyWith(sensors: status);
+
+    _openSettings(status);
+  }
+
+  requestLocationPermission() async {
+    final status = await Permission.location.request();
+    state = state.copyWith(location: status);
+
+    _openSettings(status);
+  }
+
+  _openSettings(PermissionStatus status) {
     if (status == PermissionStatus.permanentlyDenied) {
       openAppSettings();
     }
