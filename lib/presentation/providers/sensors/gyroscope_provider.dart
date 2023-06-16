@@ -11,9 +11,15 @@ class GyroscopeXYZ {
     required this.y,
     required this.z,
   });
+
+  @override
+  String toString() {
+    return 'x: $x, y: $y, z: $z';
+  }
 }
 
-final gyroscopeProvider = StreamProvider<GyroscopeXYZ>((ref) async* {
+final gyroscopeProvider =
+    StreamProvider.autoDispose<GyroscopeXYZ>((ref) async* {
   await for (final event in gyroscopeEvents) {
     yield GyroscopeXYZ(
       x: double.parse(event.x.toStringAsFixed(2)),
