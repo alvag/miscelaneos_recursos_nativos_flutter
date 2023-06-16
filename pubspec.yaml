@@ -41,6 +41,7 @@ dependencies:
   permission_handler: ^10.3.0
   sensors_plus: ^2.0.5
   flutter_compass: ^0.7.0
+  dio: ^5.2.1+1
 
 dev_dependencies:
   flutter_test:
