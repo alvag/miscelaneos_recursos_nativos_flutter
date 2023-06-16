@@ -22,8 +22,31 @@ class CompassScreen extends ConsumerWidget {
         iconTheme: const IconThemeData(color: Colors.white),
       ),
       body: const Center(
-        child: Text('CompassScreen'),
+        child: Compass(),
       ),
+    );
+  }
+}
+
+class Compass extends StatelessWidget {
+  const Compass({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        const Text('155', style: TextStyle(color: Colors.white, fontSize: 30)),
+        const SizedBox(height: 20),
+        Stack(
+          alignment: Alignment.center,
+          children: [
+            Image.asset('assets/images/compass/quadrant-2.png'),
+            Image.asset('assets/images/compass/needle-1.png'),
+          ],
+        )
+      ],
     );
   }
 }
