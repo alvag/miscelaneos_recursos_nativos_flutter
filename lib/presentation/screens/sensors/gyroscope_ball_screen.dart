@@ -17,7 +17,7 @@ class GyroscopeBallScreen extends ConsumerWidget {
         child: gyroscope$.when(
           data: (value) => MovieBall(x: value.x, y: value.y),
           error: (error, stackTrace) => Text('Error: $error'),
-          loading: () => CircularProgressIndicator(),
+          loading: () => const CircularProgressIndicator(),
         ),
       ),
     );
@@ -32,10 +32,22 @@ class MovieBall extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    double screenWidth = size.width;
+    double screenHeight = size.height;
+    double currentYPos = y * 150;
+    double currentXPos = x * 150;
+
     return Stack(
       alignment: Alignment.center,
       children: [
-        const Ball(),
+        AnimatedPositioned(
+          left: (currentYPos - 25) + (screenWidth / 2),
+          top: (currentXPos - 25) + (screenHeight / 2),
+          curve: Curves.easeInOut,
+          duration: const Duration(milliseconds: 1000),
+          child: const Ball(),
+        ),
         Text(
           '''
         X: $x,
@@ -56,7 +68,7 @@ class Ball extends StatelessWidget {
     return Container(
       width: 50,
       height: 50,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.blue,
         borderRadius: BorderRadius.all(Radius.circular(50)),
       ),
