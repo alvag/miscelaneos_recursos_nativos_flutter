@@ -1,0 +1,10 @@
+[{
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.maxalva.miscelaneos",
+      "sha256_cert_fingerprints":
+      ["7C:B8:EF:43:54:9C:36:78:0B:36:CF:F2:C8:13:CD:A4:59:9D:1F:03:2E:3E:B8:A1:64:08:6A:1E:BB:84:DA:85"]
+    }
+  }]
+  
