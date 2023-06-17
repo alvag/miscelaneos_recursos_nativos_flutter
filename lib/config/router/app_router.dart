@@ -37,7 +37,7 @@ final appRouter = GoRouter(routes: [
         GoRoute(
           path: ':id',
           builder: (context, state) {
-            return PokemonScreen(pokemonId: state.pathParameters['id'] ?? '');
+            return PokemonScreen(pokemonId: state.pathParameters['id'] ?? '1');
           },
         )
       ]),
