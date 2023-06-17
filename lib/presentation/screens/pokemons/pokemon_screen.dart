@@ -35,7 +35,7 @@ class _PokemonView extends StatelessWidget {
           IconButton(
             onPressed: () {
               SharePlugin.shareLink(
-                pokemon.spriteFront,
+                'https://prized-spade-production.up.railway.app/pokemons/${pokemon.id}',
                 'Pokemon ${pokemon.name}',
               );
             },
