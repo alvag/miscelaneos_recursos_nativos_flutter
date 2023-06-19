@@ -22,6 +22,7 @@ final menuItems = <MenuItem>[
   MenuItem('Mapas', Icons.map_outlined, '/maps'),
   MenuItem('Controlado', Icons.gamepad_outlined, '/controlled-map'),
   MenuItem('Badge', Icons.notification_important, '/badge'),
+  MenuItem('Background process', Icons.storage_rounded, '/db-pokemons'),
 ];
 
 class MainMenu extends StatelessWidget {

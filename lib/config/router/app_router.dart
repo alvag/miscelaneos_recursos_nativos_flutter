@@ -61,4 +61,8 @@ final appRouter = GoRouter(routes: [
     path: '/badge',
     builder: (context, state) => const BadgeScreen(),
   ),
+  GoRoute(
+    path: '/db-pokemons',
+    builder: (context, state) => const DbPokemonsScreen(),
+  ),
 ]);

@@ -1,11 +1,23 @@
 import 'package:workmanager/workmanager.dart';
 
-@pragma(
-    'vm:entry-point') // Mandatory if the App is obfuscated or using Flutter 3.1+
+const fetchBackgroundTaskKey = 'com.maxalva.miscelaneos.fetchBackgroundTask';
+const fetchPeriodicBackgroundTaskKey =
+    'com.maxalva.miscelaneos.fetchPeriodicBackgroundTask';
+
+@pragma('vm:entry-point')
 void callbackDispatcher() {
   Workmanager().executeTask((task, inputData) {
-    print(
-        "Native called background task: $task"); //simpleTask will be emitted here.
+    switch (task) {
+      case fetchBackgroundTaskKey:
+        print('fetchBackgroundTaskKey');
+        break;
+      case fetchPeriodicBackgroundTaskKey:
+        print('fetchPeriodicBackgroundTaskKey');
+        break;
+      case Workmanager.iOSBackgroundTask:
+        print('iOSBackgroundTask');
+    }
+
     return Future.value(true);
   });
 }
