@@ -20,6 +20,10 @@ void main() {
   Workmanager().registerOneOffTask(
     "com.maxalva.miscelaneos.simpleTask",
     "com.maxalva.miscelaneos.simpleTask",
+    inputData: {'data1': 'value1', 'data2': 'value2'},
+    constraints: Constraints(
+      networkType: NetworkType.connected,
+    ),
   );
 
   runApp(
