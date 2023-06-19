@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:miscelaneos/config/config.dart';
 import 'package:miscelaneos/presentation/providers/providers.dart';
+import 'package:workmanager/workmanager.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -11,6 +12,15 @@ void main() {
   ]);
 
   QuickActionsPlugin.registerActions();
+
+  Workmanager().initialize(
+    callbackDispatcher,
+    isInDebugMode: false,
+  );
+  Workmanager().registerOneOffTask(
+    "com.maxalva.miscelaneos.simpleTask",
+    "com.maxalva.miscelaneos.simpleTask",
+  );
 
   runApp(
     const ProviderScope(
