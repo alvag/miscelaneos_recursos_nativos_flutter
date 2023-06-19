@@ -17,6 +17,10 @@ class MapState {
     this.controller,
   });
 
+  Set<Marker> get markersSet {
+    return Set.from(markers);
+  }
+
   MapState copyWith({
     bool? isReady,
     bool? followUser,
@@ -79,6 +83,22 @@ class MapNotifier extends StateNotifier<MapState> {
     if (_lastUserLocation != null) {
       goToLocation(_lastUserLocation!.$1, _lastUserLocation!.$2);
     }
+  }
+
+  void addMarkerCurrentPosition() {
+    if (_lastUserLocation == null) return;
+
+    final (latitude, longitude) = _lastUserLocation!;
+    addMarker(latitude, longitude, 'Test Marker');
+  }
+
+  void addMarker(double latitude, double longitude, String name) {
+    final marker = Marker(
+      markerId: MarkerId('${state.markers.length}'),
+      position: LatLng(latitude, longitude),
+      infoWindow: InfoWindow(title: name, snippet: 'This is a test'),
+    );
+    state = state.copyWith(markers: [...state.markers, marker]);
   }
 }
 

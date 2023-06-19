@@ -80,7 +80,11 @@ class MapAndControls extends ConsumerWidget {
           left: 20,
           child: IconButton.filledTonal(
             icon: const Icon(Icons.pin_drop),
-            onPressed: () {},
+            onPressed: () {
+              ref
+                  .read(mapControllerProvider.notifier)
+                  .addMarkerCurrentPosition();
+            },
           ),
         ),
       ],
@@ -104,7 +108,10 @@ class _MapView extends ConsumerStatefulWidget {
 class _MapViewState extends ConsumerState<_MapView> {
   @override
   Widget build(BuildContext context) {
+    final mapController = ref.watch(mapControllerProvider);
+
     return GoogleMap(
+      markers: mapController.markersSet,
       mapType: MapType.normal,
       initialCameraPosition: CameraPosition(
         target: LatLng(widget.initialLatitude, widget.initialLongitude),
@@ -115,6 +122,11 @@ class _MapViewState extends ConsumerState<_MapView> {
       myLocationButtonEnabled: false,
       onMapCreated: (GoogleMapController controller) {
         ref.read(mapControllerProvider.notifier).setMapController(controller);
+      },
+      onLongPress: (LatLng latLng) {
+        ref
+            .read(mapControllerProvider.notifier)
+            .addMarker(latLng.latitude, latLng.longitude, 'Custom marker');
       },
     );
   }
