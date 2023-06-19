@@ -10,6 +10,8 @@ void main() {
     DeviceOrientation.portraitUp // Vertical
   ]);
 
+  QuickActionsPlugin.registerActions();
+
   runApp(
     const ProviderScope(
       child: MyApp(),
