@@ -34,8 +34,13 @@ class MapState {
 
 class MapNotifier extends StateNotifier<MapState> {
   StreamSubscription? _userLocationSubscription;
+  (double, double)? _lastUserLocation;
 
-  MapNotifier() : super(MapState());
+  MapNotifier() : super(MapState()) {
+    trackUser().listen((event) {
+      _lastUserLocation = event;
+    });
+  }
 
   void setMapController(GoogleMapController controller) {
     state = state.copyWith(controller: controller, isReady: true);
@@ -61,11 +66,18 @@ class MapNotifier extends StateNotifier<MapState> {
     state = state.copyWith(followUser: !state.followUser);
 
     if (state.followUser) {
+      findUser();
       _userLocationSubscription = trackUser().listen((event) {
         goToLocation(event.$1, event.$2);
       });
     } else {
       _userLocationSubscription?.cancel();
+    }
+  }
+
+  findUser() {
+    if (_lastUserLocation != null) {
+      goToLocation(_lastUserLocation!.$1, _lastUserLocation!.$2);
     }
   }
 }

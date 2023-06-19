@@ -59,10 +59,7 @@ class MapAndControls extends ConsumerWidget {
           child: IconButton.filledTonal(
             icon: const Icon(Icons.location_searching),
             onPressed: () {
-              ref.read(mapControllerProvider.notifier).goToLocation(
-                    latitude,
-                    longitude,
-                  );
+              ref.read(mapControllerProvider.notifier).findUser();
             },
           ),
         ),
