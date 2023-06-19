@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MapState {
@@ -30,6 +33,8 @@ class MapState {
 }
 
 class MapNotifier extends StateNotifier<MapState> {
+  StreamSubscription? _userLocationSubscription;
+
   MapNotifier() : super(MapState());
 
   void setMapController(GoogleMapController controller) {
@@ -44,6 +49,24 @@ class MapNotifier extends StateNotifier<MapState> {
     state.controller?.animateCamera(
       CameraUpdate.newCameraPosition(newPosition),
     );
+  }
+
+  Stream<(double, double)> trackUser() async* {
+    await for (final position in Geolocator.getPositionStream()) {
+      yield (position.latitude, position.longitude);
+    }
+  }
+
+  void toggleFollowUser() {
+    state = state.copyWith(followUser: !state.followUser);
+
+    if (state.followUser) {
+      _userLocationSubscription = trackUser().listen((event) {
+        goToLocation(event.$1, event.$2);
+      });
+    } else {
+      _userLocationSubscription?.cancel();
+    }
   }
 }
 

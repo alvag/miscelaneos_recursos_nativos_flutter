@@ -9,10 +9,10 @@ class ControlledMapScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
-    final watchUserLocation = ref.watch(userLocationProvider);
+    final userInitialLocation = ref.watch(userLocationProvider);
 
     return Scaffold(
-      body: watchUserLocation.when(
+      body: userInitialLocation.when(
         data: (data) => MapAndControls(
           latitude: data.$1,
           longitude: data.$2,
@@ -40,6 +40,8 @@ class MapAndControls extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
+    final mapControllerState = ref.watch(mapControllerProvider);
+
     return Stack(
       children: [
         _MapView(initialLatitude: latitude, initialLongitude: longitude),
@@ -68,8 +70,12 @@ class MapAndControls extends ConsumerWidget {
           bottom: 90,
           left: 20,
           child: IconButton.filledTonal(
-            icon: const Icon(Icons.directions_run),
-            onPressed: () {},
+            icon: Icon(mapControllerState.followUser
+                ? Icons.directions_run
+                : Icons.accessibility_new),
+            onPressed: () {
+              ref.read(mapControllerProvider.notifier).toggleFollowUser();
+            },
           ),
         ),
         Positioned(
