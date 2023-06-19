@@ -20,7 +20,7 @@ final menuItems = <MenuItem>[
   MenuItem('Biometrics', Icons.fingerprint, '/biometrics'),
   MenuItem('Ubicacion', Icons.pin_drop, '/location'),
   MenuItem('Mapas', Icons.map_outlined, '/maps'),
-  MenuItem('Controlado', Icons.gamepad_outlined, '/biometrics'),
+  MenuItem('Controlado', Icons.gamepad_outlined, '/controlled-map'),
 ];
 
 class MainMenu extends StatelessWidget {
