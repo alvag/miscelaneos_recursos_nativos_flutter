@@ -26,22 +26,22 @@ class QuickActionsPlugin {
       const ShortcutItem(
         type: 'biometric',
         localizedTitle: 'Biometrics',
-        // icon: 'ic_fingerprint',
+        icon: 'finger',
       ),
       const ShortcutItem(
         type: 'compass',
         localizedTitle: 'Compass',
-        // icon: 'ic_compass',
+        icon: 'compass',
       ),
       const ShortcutItem(
         type: 'pokemons',
         localizedTitle: 'Pokemons',
-        // icon: 'ic_pokeball',
+        icon: 'pokemons',
       ),
       const ShortcutItem(
         type: 'charmander',
         localizedTitle: 'Charmander',
-        // icon: 'ic_charmander',
+        icon: 'charmander',
       ),
     ]);
   }
